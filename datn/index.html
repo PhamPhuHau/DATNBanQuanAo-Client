@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <style>
+            .wrapper {
+                width: 400px;
+                margin: 0 auto;
+                background-color: #1b737d;
+                padding: 30px;
+                color: #fff;
+            }
+
+            .task { 
+                position: relative;
+                background-color: #fffad6;
+                color: #000;
+                padding: 10px;
+                margin-bottom: 5px;
+
+            }
+
+            .task p {
+                padding: 0;
+                margin: 0;
+                display: inline-block;
+            }
+
+            .task button {
+                position: absolute;
+                right: 0;
+                top: 0;
+                border: none;
+                background-color: #ff0000;
+                color: #fff;
+                height: 100%;
+                width: 40px;
+            }
+
+            .mb-5 {
+                margin-bottom: 5px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1 class="text-center">TODO LIST APP</h1>
+            <div class="form-add-task">
+                <label>Task name:</label>
+                <input type="text" placeholder="Input name of task" />
+                <button>Add</button>
+            </div>
+            <div class="list-tasks">
+                <h3 class="mb-5">List of tasks:</h3>
+                <div class="task">
+                    <p>Task 1</p>
+                    <button>X</button>
+                </div>
+                <div class="task">
+                    <p>Task 2</p>
+                    <button>X</button>
+                </div>
+                <div class="task">
+                    <p>Task 3</p>
+                    <button>X</button>
+                </div>
+            </div>
+        </div>
+    </body>
+<html>
