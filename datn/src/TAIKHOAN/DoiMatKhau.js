@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 function DoiMatKhau() {
-    // //---------các state ---------------------
+    // //---------các state ---------------------a
 
   //lưu value nhập vào của email ở input
   const [email, setEmail] = useState('');
