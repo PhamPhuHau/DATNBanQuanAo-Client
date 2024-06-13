@@ -11,6 +11,7 @@ function KTDonHang() {
 
   //-------------State-------------------
   let { hdID } = useParams();
+  console.log(hdID);
   const [trangThai, setTrangThai] = useState();
   const [sanPham, setSanPham] = useState();
   const [nhanXet, setNhanXet] = useState();
@@ -349,7 +350,6 @@ function KTDonHang() {
   return (
     <>
       <Head />
-      <Menu />
 
       <section className="vh-50" style={{ backgroundColor: "#eee" }}>
         <div className="container py-5 h-100">

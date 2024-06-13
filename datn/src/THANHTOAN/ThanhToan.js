@@ -79,41 +79,40 @@ function ThanhToan() {
 
 
 
-    const HamThanhToan = () => { 
-        
-            axios.post('http://127.0.0.1:8000/api/thanh-toan',{
-                khach_hang: khachHang.id,
-                tong_tien: calculateTotal(),
-                mau: mauArr,
-                tien_ship: tienShip,
-                size: sizeArr,
-                so_luong: soLuong,
-                gia: gia,
-                ten: tenSanPhamArr,
-                PhuongThucThanhToan: phuongThucThanhToan,
-            }).then(function(response){
-                if(response.data.url)
-                {
-                    window.location.href = response.data.url;
-                }
-               else{
-                
-                 window.location.href = `KTDONHANG/${response.data.data}`;
-               }
-               
-            }).catch(function(error){
-                if(error.response.status===422)
-                {
-                    Swal.fire({
-                        title: "Thất bại",
-                        text: error.response.data.errors ,
-                        icon: "error"
-                    });
-                }
-            
-            })
-        }
-       
+      const HamThanhToan = () => {
+        axios.post('http://127.0.0.1:8000/api/thanh-toan', {
+            khach_hang: khachHang.id,
+            tong_tien: calculateTotal(),
+            mau: mauArr,
+            tien_ship: tienShip,
+            size: sizeArr,
+            so_luong: soLuong,
+            gia: gia,
+            ten: tenSanPhamArr,
+            PhuongThucThanhToan: phuongThucThanhToan,
+        }).then(function(response){
+            if(response.data.url) {
+                window.location.href = response.data.url;
+            } else {
+                window.location.href = `KTDONHANG/${response.data.data}`;
+            }
+        }).catch(function(error){
+            if(error.response && error.response.status === 422) {
+                Swal.fire({
+                    title: "Thất bại",
+                    text: error.response.data.errors,
+                    icon: "error"
+                });
+            } else {
+                Swal.fire({
+                    title: "Lỗi hệ thống",
+                    text: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+                    icon: "error"
+                });
+            }
+        });
+    }
+    
 
     
 
