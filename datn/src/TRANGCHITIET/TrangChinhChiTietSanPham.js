@@ -204,23 +204,20 @@ function TrangChinhChiTietSanPham() {
   
     //đây là hàm lưu sản phẩm vào trong giỏ hàng
     const ChonMua = () => {
-      if(storedToken===null)
-      {
+      if (storedToken === null) {
         Swal.fire({
-        title: "Thất bại",
-        text: 'Vui lòng đăng nhập.' ,
-        icon: "error"
-      });
-      return;
-
+          title: "Thất bại",
+          text: 'Vui lòng đăng nhập.',
+          icon: "error"
+        });
+        return;
       }
       if (!selectedSize || !selectedColor) {
         Swal.fire({
           title: "Thất bại",
-          text: 'Vui lòng chọn size và màu trước khi thêm vào giỏ hàng.' ,
+          text: 'Vui lòng chọn size và màu trước khi thêm vào giỏ hàng.',
           icon: "error"
         });
-      
         return;
       }
 
@@ -248,34 +245,24 @@ function TrangChinhChiTietSanPham() {
           mau: existingItem.selectedColor,
           size: existingItem.selectedSize,
           sanPham: existingItem.ten,
-          soLuong: existingItem.so_luong+1
-        }).then(function(request){
-          if(request.data.trangThai===1)
-          {
+          soLuong: existingItem.so_luong + 1
+        }).then(function (request) {
+          if (request.data.trangThai === 1) {
             existingItem.so_luong += 1;
             localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
             Swal.fire({
-              text:'Thêm sản phẩm vào giỏ hàng thành công',
+              text: 'Thêm sản phẩm vào giỏ hàng thành công',
               icon: "success"
             });
-          }
-          else
-          {
+          } else {
             Swal.fire({
               title: "Thất bại",
-              text: 'Không đủ sản phẩm' ,
+              text: 'Sản phẩm đã hết hàng',
               icon: "error"
-            }); 
+            });
           }
         })
-
-
-
-        
-        
-       
       } else {
-        //biến này là sản phẩm mới
         const newCartItem = {
           id: sanPham.id,
           ten: sanPham.ten,
@@ -285,60 +272,52 @@ function TrangChinhChiTietSanPham() {
           selectedSize,
           selectedColor,
         };
-        //thêm sản phẩm mới vào mảng existingCartItems
         existingCartItems.push(newCartItem);
-        // lưu existingCartItems vào trong localStore
         localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
         Swal.fire({
-          text:'Thêm mới sản phẩm vào giỏ hàng thành công',
+          text: 'Thêm mới sản phẩm vào giỏ hàng thành công',
           icon: "success"
         });
       }
-      
-      
-    
-    
     };
-
     //đây là nơi hiển thị các size trên trang để người dùng có thể chọn
     const listSize = () => {
-      const uniqueSizes = new Set();
-      return sizeMauSP.map((item, index) => {
-        const size = item.size.ten;
-        if (!uniqueSizes.has(size)) {
-          uniqueSizes.add(size);
-          return (
-            <div key={index} className="form-check form-check-inline">
-              <input className="form-check-input" type="radio" name="sizeOptions" id={`size-${index}`} value={size}
-                checked={selectedSize === size}
-                onChange={() => handleSizeChange(size)} />
-              <label className="form-check-label" htmlFor={`size-${index}`}>{size}</label>
-            </div>
-          );
-        }
-        return null;
-      });
+      // Lọc ra danh sách các size tương ứng với màu đã chọn
+      const filteredSizes = sizeMauSP.filter(item => item.mau.ten === selectedColor).map(item => item.size.ten);
+      // Tạo các option cho dropdown box
+      const options = filteredSizes.map((size, index) => (
+        <option key={index} value={size}>{size}</option>
+      ));
+      // Hiển thị dropdown box với các option tương ứng
+      return (
+        <div className="form-group">
+          <label htmlFor="sizeOptions">Chọn size:</label>
+          <select className="form-control" id="sizeOptions" value={selectedSize} onChange={(e) => handleSizeChange(e.target.value)}>
+            <option value="">Chọn size</option>
+            {options}
+          </select>
+        </div>
+      );
     };
+    
   
     const listMau = () => {
-      const uniqueColors = new Set();
-      return sizeMauSP.map((item, index) => {
-        const color = item.mau.ten;
-        if (!uniqueColors.has(color)) {
-          uniqueColors.add(color);
-          return (
-            <div key={index} className="form-check form-check-inline">
-              <input className="form-check-input" type="radio" name="colorOptions" id={`color-${index}`} value={color}
-                checked={selectedColor === color}
-                onChange={() => handleColorChange(color)} />
-              <label className="form-check-label" htmlFor={`color-${index}`}>{color}</label>
-            </div>
-          );
-        }
-
-        return null;
-      });
+      const uniqueColors = new Set(sizeMauSP.map(item => item.mau.ten));
+      const options = Array.from(uniqueColors).map((color, index) => (
+        <option key={index} value={color}>{color}</option>
+      ));
+    
+      return (
+        <div className="form-group">
+          <label htmlFor="colorOptions">Chọn màu:</label>
+          <select className="form-control" id="colorOptions" value={selectedColor} onChange={(e) => handleColorChange(e.target.value)}>
+            <option value="">Chọn màu</option>
+            {options}
+          </select>
+        </div>
+      );
     };
+    
 
     /* const dsBinhLuan = danhSachBinhLuan.map((item, index) => (
        <React.Fragment key={index}>

@@ -43,7 +43,7 @@ function Avatar(props)
     {
         if(props.khachHang)
         {
-            return(<img className="default-img" src={props.khachHang.image_path + props.khachHang.avatar} alt="#" />
+            return(<img className="default-img" src={props.khachHang.image_path + props.khachHang.avatar} style={{maxWidth: "500px",height: "300px"}} alt="#" />
             )
         }
         return(<img style={{textAlign: 'center'}} className="default-img" src="https://via.placeholder.com/550x750" alt="#" />)

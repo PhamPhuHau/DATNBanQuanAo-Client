@@ -162,7 +162,7 @@ function BinhLuan() {
 			item.binh_luan_cap_hai.map((item2, index) => (
 			  <div key={index} className="single-comment left">
 				{item2.khach_hang && item2.khach_hang.avatar ? (
-						<img src={item2.khach_hang.image_path + item2.khach_hang.avatar} alt="#" />
+						<img src={item2.khach_hang.image_path + item2.khach_hang.avatar} alt="#" style={{maxWidth: '80px',height: '80px'}} />
 					) : (
 						<img src="https://via.placeholder.com/80x80" alt="#" />
 					)}
@@ -208,7 +208,7 @@ function BinhLuan() {
 			<>
 				<div className="single-comment">
 					{item.khach_hang && item.khach_hang.avatar ? (
-						<img src={item.khach_hang.image_path + item.khach_hang.avatar} alt="#" />
+						<img src={item.khach_hang.image_path + item.khach_hang.avatar} alt="#" style={{maxWidth: '80px',height: '80px'}}/>
 					) : (
 						<img src="https://via.placeholder.com/80x80" alt="#" />
 					)}
